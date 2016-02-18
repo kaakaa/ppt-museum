@@ -1,0 +1,5 @@
+task runDockerCompose(type:Exec) {
+    workingDir './'
+    executable "sh"
+    args "-c", "docker-compose up -d"
+}
