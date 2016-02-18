@@ -17,7 +17,7 @@ web:
   environment:
     GRADLE_VERSION: 2.10
   volumes:
-    - /home/kaakaa/IdeaProjects/ppt-museum/web:/app
+    - ./web:/app
   links:
     - db:db
     - jod:jod
