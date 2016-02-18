@@ -82,7 +82,7 @@ public class RequestUtil {
         byte[] results = new byte[1024];
 
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost post = new HttpPost("http://localhost:8080/converter/converted/document.pdf");
+            HttpPost post = new HttpPost("http://jod:8080/converter/converted/document.pdf");
 
             HttpEntity entity = MultipartEntityBuilder.create()
                     .addTextBody("outputFormat", "pdf")

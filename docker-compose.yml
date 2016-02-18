@@ -1,4 +1,4 @@
-soffice:
+jod:
   build: ./jod/
   ports:
     - "8080:8080"
@@ -10,7 +10,14 @@ db:
     - 27017:27017
 
 web:
-  image: java
+  image: qlik/gradle
+  command: clean run -info
+  ports:
+    - "4567:4567"
+  environment:
+    GRADLE_VERSION: 2.10
+  volumes:
+    - /home/kaakaa/IdeaProjects/ppt-museum/web:/app
   links:
     - db:db
-    - soffice:soffice
+    - jod:jod
