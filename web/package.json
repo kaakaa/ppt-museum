@@ -1,0 +1,21 @@
+{
+  "name": "ppt-museum",
+  "version": "0.0.1",
+  "description": "ppt and pptx file uploader and slideshow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o build.js"
+  },
+  "author": "kaakaa",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
+    "grunt-contrib-cssmin": "^0.14.0"
+  },
+  "dependencies": {
+    "pdf.js-controller": "^1.0.1"
+  }
+}

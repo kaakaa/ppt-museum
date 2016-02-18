@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= "ppt-museum"
+    link(rel='stylesheet', href='/css/pdf-slide.min.css')
+  body
+    for doc in documents
+      table
+        tr
+          td
+            a(href="/slide/#{doc.id}") #{doc.title}
+          td #{doc.description}
+          td #{doc.id}
+    p
+      a(href="/upload") upload
+    :js
+      var PDFURL = "/pdf/example.pdf";
+    script(src='/js/pdf.js-controller.js')
+

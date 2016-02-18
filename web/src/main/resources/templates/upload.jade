@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= "ppt-museum"
+    link(rel='stylesheet', href='/css/pdf-slide.min.css')
+  body
+    form(method="post", action="/upload", enctype="multipart/form-data")
+      p Title
+        input(type="text", name="title")
+      p Description
+        input(type="text", name="desc")
+      p Tag
+        input(type="text", name="tags")
+      p File
+        input(type="file", name="file") send
+      input(type="submit", value="send")
+
