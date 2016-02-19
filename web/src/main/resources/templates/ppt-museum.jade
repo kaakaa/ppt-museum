@@ -4,13 +4,15 @@ html
     title= "ppt-museum"
     link(rel='stylesheet', href='/css/pdf-slide.min.css')
   body
-    for doc in documents
+    for slide in slides
       table
         tr
           td
-            a(href="/slide/#{doc.id}") #{doc.title}
-          td #{doc.description}
-          td #{doc.id}
+            a(href="/slide/#{slide.id}") #{slide.title}
+          td #{slide.description}
+          td #{slide.id}
+          td
+            img(src="data:image/png;base64,#{slide.getThumbnailSrc()}", width="32", height="32")
     p
       a(href="/upload") upload
     :js

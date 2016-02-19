@@ -1,6 +1,7 @@
 package org.kaakaa.pptmuseum.http;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -9,10 +10,17 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.pdfbox.PDFBox;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDResources;
 import org.kaakaa.pptmuseum.db.document.Document;
 import org.kaakaa.pptmuseum.db.document.Slide;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,9 +59,10 @@ public class RequestUtil {
      * <p>make Document class instance of request item</p>
      *
      * @param item FileItem in multipart request
+     * @param slide
      * @return Document model
      */
-    public static Optional<Document> makeDocumentModel(FileItem item) {
+    public static Optional<Document> makeDocumentModel(FileItem item, Slide slide) {
         Document doc = new Document();
         doc.setContentType(item.getContentType());
 
@@ -68,6 +77,20 @@ public class RequestUtil {
             default:
                 return Optional.ofNullable(null);
         }
+
+        // make pdf thumbnail
+        InputStream input = new ByteArrayInputStream(doc.getFile());
+        try {
+            PDDocument pdDoc = PDDocument.load(input);
+            PDPage page = (PDPage) pdDoc.getDocumentCatalog().getAllPages().get(0);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(page.convertToImage(), "png", baos);
+            slide.setThumbnail(baos.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Optional.ofNullable(null);
+        }
+
         return Optional.of(doc);
     }
 

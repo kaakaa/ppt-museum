@@ -5,6 +5,9 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+
 /**
  * Created by kaakaa on 16/02/13.
  */
@@ -19,8 +22,18 @@ public class Slide {
     private String uploaded;
     @Property("description")
     private String description;
+    @Property("thumbnail")
+    private byte[] thumbnail;
 
     public Slide() {
+    }
+
+    public void setThumbnail(byte[] file) {
+        this.thumbnail = file;
+    }
+
+    public String getThumbnailSrc() {
+        return Base64.getEncoder().encodeToString(this.thumbnail);
     }
 
     public ObjectId getId() {

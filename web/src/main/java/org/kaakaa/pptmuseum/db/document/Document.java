@@ -25,14 +25,15 @@ public class Document {
         return file;
     }
 
+
     public void setId(String id) {
         this.id = new ObjectId(id);
     }
-    
+
     public void setContentType(String type) {
         this.contentType = type;
     }
-    
+
     public String getContentType() {
         return this.contentType;
     }

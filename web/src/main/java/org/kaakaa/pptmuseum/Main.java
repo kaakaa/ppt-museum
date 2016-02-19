@@ -56,7 +56,7 @@ public class Main {
                     .filter(i -> !i.isFormField())
                     .findFirst()
                     .ifPresent(i -> {
-                        RequestUtil.makeDocumentModel(i)
+                        RequestUtil.makeDocumentModel(i, slide)
                                 // upload document
                                 .ifPresent(d -> mongoDBClient.upload(slide, d));
                     });
@@ -81,7 +81,7 @@ public class Main {
 
     private static Map<String, List<Slide>> getDocuments(MongoDBClient mongoDBClient) {
         Map<String, List<Slide>> map = new HashMap<>();
-        map.put("documents", mongoDBClient.searchAll());
+        map.put("slides", mongoDBClient.searchAll());
         return map;
     }
 }

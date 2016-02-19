@@ -11,7 +11,7 @@ db:
 
 web:
   image: qlik/gradle
-  command: clean run -info
+  command: clean startWeb -info
   ports:
     - "4567:4567"
   environment:
