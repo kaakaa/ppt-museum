@@ -10,6 +10,8 @@ html
             a(href="/ppt-museum/slide/#{slide.id}") #{slide.title}
           td #{slide.description}
           td #{slide.id}
+          td
+            img(src="/ppt-museum/thumbnail/#{slide.id}", width="64", height="48"))
     p
       a(href="/ppt-museum/upload") upload
     :js

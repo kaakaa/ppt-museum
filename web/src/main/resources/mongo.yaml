@@ -4,3 +4,5 @@ mongo:
 morphia:
   package: org.kaakaa.pptmuseum.db.document
   collection: pptmuseum
+redis:
+  host: redis

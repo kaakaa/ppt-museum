@@ -36,6 +36,10 @@ public class Slide {
         return Base64.getEncoder().encodeToString(this.thumbnail);
     }
 
+    public byte[] getThumbnail() {
+        return this.thumbnail;
+    }
+
     public ObjectId getId() {
         return this.id;
     }

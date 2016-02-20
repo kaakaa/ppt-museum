@@ -4,13 +4,16 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.kaakaa.pptmuseum.db.MongoDBClient;
+import org.kaakaa.pptmuseum.db.RedisClient;
 import org.kaakaa.pptmuseum.db.document.Document;
 import org.kaakaa.pptmuseum.db.document.Slide;
 import org.kaakaa.pptmuseum.http.RequestUtil;
 import spark.ModelAndView;
+import spark.Request;
 import spark.template.jade.JadeTemplateEngine;
 
 import java.net.UnknownHostException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +77,15 @@ public class Main {
             Document document = mongoDBClient.getPDF(rq.params(":id"));
             rs.type(document.getContentType());
             return document.getFile();
+        });
+        get("/ppt-museum/thumbnail/:id", (rq,rs) -> {
+            byte[] file = RedisClient.get(rq.params("id"));
+            rs.type("image/png");
+            rs.header("Content-length", String.valueOf(file.length));
+            rs.raw().getOutputStream().write(file);
+            rs.raw().getOutputStream().flush();
+            rs.raw().getOutputStream().close();
+            return rs.raw();
         });
     }
 
