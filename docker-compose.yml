@@ -9,15 +9,36 @@ db:
   ports:
     - 27017:27017
 
-web:
-  image: qlik/gradle
-  command: clean startWeb -info
+nginx:
+  image: nginx
   ports:
-    - "4567:4567"
-  environment:
-    GRADLE_VERSION: 2.10
+    - "4567:80"
+  links:
+    - web:web
   volumes:
-    - ./web:/app
+    - ./nginx/mysite.template:/etc/nginx/conf.d/mysite.template
+  command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
+
+web:
+  image: java
+  command: /bin/bash -c "/app/bin/ppt-museum"
+#  ports:
+#    - "4567:4567"
+  volumes:
+    - ./web/build/install/ppt-museum:/app
   links:
     - db:db
     - jod:jod
+# web:
+#   image: qlik/gradle
+#   command: clean startWeb -info
+#   ports:
+#     - "4567:4567"
+#   environment:
+#     GRADLE_VERSION: 2.10
+#   volumes:
+#     - ./web:/app
+#   links:
+#     - db:db
+#     - jod:jod

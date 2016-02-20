@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= "ppt-museum"
-    link(rel='stylesheet', href='/css/pdf-slide.min.css')
+    link(rel='stylesheet', href='/ppt-museum/css/pdf-slide.min.css')
     :css
       .controls {
           position: absolute;
@@ -47,5 +47,5 @@ html
       #js-prev.arrow.prev
       #js-next.arrow.next
     :js
-      var PDFURL = "/document/pdf/#{id}";
-    script(src='/js/pdf.js-controller.js')
+      var PDFURL = "/ppt-museum/document/pdf/#{id}";
+    script(src='/ppt-museum/js/pdf.js-controller.js')

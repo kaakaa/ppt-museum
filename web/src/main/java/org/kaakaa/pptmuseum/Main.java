@@ -28,6 +28,7 @@ public class Main {
     private static final MongoDBClient mongoDBClient = new MongoDBClient();
 
     public static void main(String[] args) throws TimeoutException, UnknownHostException {
+        port(80);
         staticFileLocation("/public");
 
         // top page
@@ -36,14 +37,13 @@ public class Main {
             return "redirect to /";
         });
         get("/ppt-museum", (rq, rs) -> {
-            Map<String, List<Slide>> map = getDocuments(mongoDBClient);
-            return new ModelAndView(map, "ppt-museum");
+            return new ModelAndView(getDocuments(mongoDBClient), "ppt-museum");
         }, new JadeTemplateEngine());
 
 
         // upload page
-        get("/upload", (rq, rs) -> new ModelAndView(new HashMap(), "upload"), new JadeTemplateEngine());
-        post("/upload", (rq, rs) -> {
+        get("/ppt-museum/upload", (rq, rs) -> new ModelAndView(new HashMap(), "upload"), new JadeTemplateEngine());
+        post("/ppt-museum/upload", (rq, rs) -> {
             // parse request
             ServletFileUpload servletFileUpload = new ServletFileUpload(new DiskFileItemFactory());
             List<FileItem> fileItems = servletFileUpload.parseRequest(rq.raw());
@@ -61,17 +61,16 @@ public class Main {
                                 .ifPresent(d -> mongoDBClient.upload(slide, d));
                     });
 
-            rs.redirect("/");
-            return "redirect to /";
-        });
+            return new ModelAndView(getDocuments(mongoDBClient), "ppt-museum");
+        }, new JadeTemplateEngine());
 
         // slide view page
-        get("/slide/:id", (rq, rs) -> {
+        get("/ppt-museum/slide/:id", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();
             map.put("id", rq.params("id"));
             return new ModelAndView(map, "slide");
         }, new JadeTemplateEngine());
-        get("/document/pdf/:id", (rq, rs) -> {
+        get("/ppt-museum/document/pdf/:id", (rq, rs) -> {
             Document document = mongoDBClient.getPDF(rq.params(":id"));
             rs.type(document.getContentType());
             return document.getFile();

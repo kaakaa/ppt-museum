@@ -2,20 +2,17 @@ doctype html
 html
   head
     title= "ppt-museum"
-    link(rel='stylesheet', href='/css/pdf-slide.min.css')
   body
     for slide in slides
       table
         tr
           td
-            a(href="/slide/#{slide.id}") #{slide.title}
+            a(href="/ppt-museum/slide/#{slide.id}") #{slide.title}
           td #{slide.description}
           td #{slide.id}
-          td
-            img(src="data:image/png;base64,#{slide.getThumbnailSrc()}", width="32", height="32")
     p
-      a(href="/upload") upload
+      a(href="/ppt-museum/upload") upload
     :js
-      var PDFURL = "/pdf/example.pdf";
-    script(src='/js/pdf.js-controller.js')
+      var PDFURL = "/ppt-museum/pdf/example.pdf";
+    script(src='/ppt-museum/js/pdf.js-controller.js')
 
