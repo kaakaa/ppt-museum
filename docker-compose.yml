@@ -1,13 +1,9 @@
 jod:
   build: ./jod/
-  ports:
-    - "8080:8080"
   command: tail -f > /dev/null
 
 db:
   image: mongo
-  ports:
-    - 27017:27017
 
 redis:
   image: redis
