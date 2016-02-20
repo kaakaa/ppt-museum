@@ -1,0 +1,21 @@
+/* my style */
+@media (min-width: 768px)
+{
+    .row-relative { position: relative; }
+
+    .col-border-padding { padding-left: 15px; }
+    .col-border
+    {
+        padding-left: 0;
+        position: static;
+    }
+
+    .col-border:before
+    {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-left: 1px solid red;
+    }
+}

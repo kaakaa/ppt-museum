@@ -3,14 +3,14 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-          'src/main/resources/public/js/pdf.js-controller.js': ['src/main/web/index.js']
+          'src/main/resources/public/ppt-museum/js/pdf.js-controller.js': ['src/main/web/index.js']
         }
       }
     },
     cssmin : {
       dist: {
         src: ['node_modules/pdf.js-controller/css/pdf-slide.css'],
-        dest: 'src/main/resources/public/css/pdf-slide.min.css'
+        dest: 'src/main/resources/public/ppt-museum/css/pdf-slide.min.css'
       }
     }
   });

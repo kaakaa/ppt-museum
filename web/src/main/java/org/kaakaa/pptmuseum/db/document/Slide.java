@@ -5,7 +5,10 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
-import java.io.UnsupportedEncodingException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 /**
@@ -15,14 +18,11 @@ import java.util.Base64;
 public class Slide {
     @Id
     private ObjectId id;
-
     @Property("title")
     private String title;
-    @Property("uploaded")
-    private String uploaded;
     @Property("description")
     private String description;
-    @Property("thumbnail")
+
     private byte[] thumbnail;
 
     public Slide() {
@@ -30,10 +30,6 @@ public class Slide {
 
     public void setThumbnail(byte[] file) {
         this.thumbnail = file;
-    }
-
-    public String getThumbnailSrc() {
-        return Base64.getEncoder().encodeToString(this.thumbnail);
     }
 
     public byte[] getThumbnail() {
@@ -61,5 +57,11 @@ public class Slide {
     }
 
     public void setTags(String tags) {
+    }
+
+    public String getTime() {
+        Instant instant = Instant.ofEpochSecond(this.id.getTimestamp());
+        LocalDateTime date = LocalDateTime.ofInstant(instant, ZoneId.of(ZoneId.SHORT_IDS.get("JST")));
+        return date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 }
