@@ -22,7 +22,7 @@ web:
   image: java
   command: /bin/bash -c "/app/bin/ppt-museum"
   volumes:
-    - ./web/build/install/ppt-museum:/app
+    - ./ppt-museum/build/install/ppt-museum:/app
   links:
     - db:db
     - jod:jod
