@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,17 +41,27 @@ public class RequestUtil {
                 .forEach(i -> {
                     switch (i.getFieldName()) {
                         case "title":
-                            slide.setTitle(i.getString());
+                            slide.setTitle(encodingMultiformString(i));
                             break;
                         case "desc":
-                            slide.setDescription(i.getString());
+                            slide.setDescription(encodingMultiformString(i));
                             break;
                         case "tags":
-                            slide.setTags(i.getString());
+                            slide.setTags(encodingMultiformString(i));
                             break;
                     }
                 });
         return slide;
+    }
+
+    private static String encodingMultiformString(FileItem item) {
+        String s = null;
+        try {
+            s = new String(item.getString().getBytes("iso-8859-1"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return s;
     }
 
     /**
