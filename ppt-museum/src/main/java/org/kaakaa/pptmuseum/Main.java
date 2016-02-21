@@ -63,7 +63,8 @@ public class Main {
                                 // upload document
                                 .ifPresent(d -> mongoDBClient.upload(slide, d));
                     });
-
+            rs.status(302);
+            rs.header("Location", "/");
             return new ModelAndView(getDocuments(mongoDBClient), "ppt-museum");
         }, new JadeTemplateEngine());
 
