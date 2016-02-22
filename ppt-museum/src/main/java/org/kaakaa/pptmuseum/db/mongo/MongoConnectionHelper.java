@@ -17,6 +17,7 @@ public class MongoConnectionHelper {
      */
     public static Datastore getMorphiaInstance() {
         Morphia morphia = new Morphia();
+        morphia.getMapper().getOptions().setStoreEmpties(true);
         morphia.mapPackage(DBResourceBundle.getString("morphia.package"));
         Datastore datastore = morphia.createDatastore(MongoConnectionHelper.getMongoClient(), DBResourceBundle.getString("morphia.collection"));
         datastore.ensureIndexes();

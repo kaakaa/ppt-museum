@@ -31,17 +31,17 @@ html(lang="ja")
 
       .row
         form(method="post", action="/ppt-museum/upload", enctype="multipart/form-data")
-          fileldset.form-group
+          fieldset.form-group
             label(for="slideTitle") Slide Title
             input.form-control(type="text", name="title", placeholder="Enter Slide Title")
-          fileldset.form-group
+          fieldset.form-group
             label(for="Description") Description
             input.form-control(type="text", name="desc", placeholder="Enter The Description")
-          fileldset.form-group
+          fieldset.form-group
             label(for="Description") Tags
             input.form-control(type="text", name="tags", placeholder="exmple - java, morphia, docker")
             small.text-muted Input keyword separated comma.
-          fileldset.form-group
+          fieldset.form-group
             label(for="Description") File
             input.form-control(type="file", name="file")
             small.text-muted File format you can upload are .ppt/.pptx/.pdf .

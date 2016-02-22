@@ -1,11 +1,14 @@
 package org.kaakaa.pptmuseum.db;
 
 import org.bson.types.ObjectId;
+import org.kaakaa.pptmuseum.db.document.Comment;
+import org.kaakaa.pptmuseum.db.document.Comments;
 import org.kaakaa.pptmuseum.db.document.Document;
 import org.kaakaa.pptmuseum.db.document.Slide;
 import org.kaakaa.pptmuseum.db.mongo.MongoConnectionHelper;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Key;
+import org.mongodb.morphia.query.Query;
 
 import java.util.List;
 
@@ -49,5 +52,26 @@ public class MongoDBClient {
      */
     public Document getPDF(String id) {
         return datastore.get(Document.class, new ObjectId(id));
+    }
+
+    public String getComments(String id) {
+        Comments comments = datastore.find(Comments.class, "slideId =", id).get();
+        if(null == comments) {
+            return "No Comments.";
+        } else {
+            return comments.toHtml();
+        }
+    }
+
+    public Key<Comments> addComments(String id, String name, String comment) {
+        Comments comments = datastore.find(Comments.class, "slideId =", id).get();
+        if (null == comments) {
+            comments = new Comments();
+            comments.setSlideId(id);
+        }
+        Comment c = new Comment(name, comment);
+        // save commments
+        comments.addComment(c);
+        return datastore.save(comments);
     }
 }

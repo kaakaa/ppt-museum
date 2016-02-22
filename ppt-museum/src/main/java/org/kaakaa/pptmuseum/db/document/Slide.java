@@ -14,7 +14,7 @@ import java.util.Base64;
 /**
  * Created by kaakaa on 16/02/13.
  */
-@Entity("document")
+@Entity
 public class Slide {
     @Id
     private ObjectId id;

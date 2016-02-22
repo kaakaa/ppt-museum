@@ -74,6 +74,12 @@ public class Main {
             map.put("id", rq.params("id"));
             return new ModelAndView(map, "slide");
         }, new JadeTemplateEngine());
+        get("/ppt-museum/slide/comments/:id", (rq, rs) -> mongoDBClient.getComments(rq.params(":id")));
+        post("/ppt-museum/slide/comments/:id", (rq, rs) -> {
+            rs.status(302);
+            rs.header("Location", "/");
+            return mongoDBClient.addComments(rq.params(":id"), rq.queryParams("name"), rq.queryParams("comment"));
+        });
         get("/ppt-museum/document/pdf/:id", (rq, rs) -> {
             Document document = mongoDBClient.getPDF(rq.params(":id"));
             rs.type(document.getContentType());
