@@ -1,6 +1,6 @@
 # ppt-museum
 
-**pp-museum** is a uploader for .ppt/.pptx/.pdf.
+**ppt-museum** is a uploader for .ppt/.pptx/.pdf.
 
 
 ![top](https://github.com/kaakaa/ppt-museum/raw/master/image.png)
