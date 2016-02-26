@@ -8,6 +8,7 @@ import org.kaakaa.pptmuseum.db.RedisClient;
 import org.kaakaa.pptmuseum.db.document.Document;
 import org.kaakaa.pptmuseum.db.document.Slide;
 import org.kaakaa.pptmuseum.http.RequestUtil;
+import org.kaakaa.pptmuseum.jade.ListHelper;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.jade.JadeTemplateEngine;
@@ -40,7 +41,10 @@ public class Main {
             return "redirect to /";
         });
         get("/ppt-museum", (rq, rs) -> {
-            return new ModelAndView(getDocuments(mongoDBClient), "ppt-museum");
+            Map<String, Object> map = new HashMap<>();
+            map.put("slides", mongoDBClient.searchAll());
+            map.put("helper", new ListHelper());
+            return new ModelAndView(map, "ppt-museum");
         }, new JadeTemplateEngine());
 
 
@@ -65,7 +69,10 @@ public class Main {
                     });
             rs.status(302);
             rs.header("Location", "/");
-            return new ModelAndView(getDocuments(mongoDBClient), "ppt-museum");
+            Map<String, Object> map = new HashMap<>();
+            map.put("slides", mongoDBClient.searchAll());
+            map.put("helper", new ListHelper());
+            return new ModelAndView(map, "ppt-museum");
         }, new JadeTemplateEngine());
 
         // slide view page
@@ -94,12 +101,5 @@ public class Main {
             rs.raw().getOutputStream().close();
             return rs.raw();
         });
-    }
-
-
-    private static Map<String, List<Slide>> getDocuments(MongoDBClient mongoDBClient) {
-        Map<String, List<Slide>> map = new HashMap<>();
-        map.put("slides", mongoDBClient.searchAll());
-        return map;
     }
 }

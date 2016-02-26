@@ -31,39 +31,10 @@ html(lang="ja")
           h1.page-header PPT-MUSEUM
             small slide uploader
 
-      for slide, i in slides
-        if i % 3 == 0
-          .row.row-relative
-        .col-md-4.portfolio-item.col-border-padding
-          a(href="/ppt-museum/slide/#{slide.id}")
-            img.img-responsive(src="/ppt-museum/thumbnail/#{slide.id}")
-          h3
-            a(href="/ppt-museum/slide/#{slide.id}") #{slide.title} -
-            small.text-muted #{slide.getTime()}
-            button.btn.btn-info-outline(id="show-comment-#{slide.id}", type="button", data-toggle="modal", data-target="#comments", data-id="#{slide.id}")
-              span.glyphicon.glyphicon-comment
-          .modal.fade#comments(tabindex="-1", role="dialog", aria-labellebdy="commentModalLabel")
-            .modal-dialog(role="document")
-              .modal-content
-                .modal-header
-                  button.close(type="button", data-dismiss="modal", aria-label="Close")
-                    span(aria-hidden="true") &times;
-                  h4.modal-title#commentModalLabel Comments to #{slide.title}
-                .modal-body
-                  div(id="comment-body-#{slide.id}")
-                  .comment-form
-                    form(id="comment-form-#{slide.id}", data-id="#{slide.id}" ,method="post", action="/ppt-museum/slide/comments/#{slide.id}")
-                      fieldset.form-inline
-                        .form-group
-                          label.sr-only(for="commentUser") name
-                          input.form-control(type="text", name="name", placeholder="name")
-                        .form-group
-                          label.sr-only(for="comment") comment
-                          input.form-control(type="text", name="comment", placeholder="comment")
-                        button.btn.btn-primary(type="submit") Comment
-                .modal-footer
-                  button.btn.btn-default(type="button", data-dismiss="modal") Close
-          p #{slide.description}
+      each tmp in helper.eachSlice(slides, 3)
+        .row.row-relative
+          each slide in tmp
+            include content
 
       .row.text-center
         .col-lg-12
