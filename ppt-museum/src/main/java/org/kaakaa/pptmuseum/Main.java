@@ -69,11 +69,8 @@ public class Main {
                     });
             rs.status(302);
             rs.header("Location", "/");
-            Map<String, Object> map = new HashMap<>();
-            map.put("slides", mongoDBClient.searchAll());
-            map.put("helper", new ListHelper());
-            return new ModelAndView(map, "ppt-museum");
-        }, new JadeTemplateEngine());
+            return "redirect to /";
+        });
 
         // slide view page
         get("/ppt-museum/slide/:id", (rq, rs) -> {
@@ -92,7 +89,7 @@ public class Main {
             rs.type(document.getContentType());
             return document.getFile();
         });
-        get("/ppt-museum/thumbnail/:id", (rq,rs) -> {
+        get("/ppt-museum/thumbnail/:id", (rq, rs) -> {
             byte[] file = RedisClient.get(rq.params("id"));
             rs.type("image/png");
             rs.header("Content-length", String.valueOf(file.length));
