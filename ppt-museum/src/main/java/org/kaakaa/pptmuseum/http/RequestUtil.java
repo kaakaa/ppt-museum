@@ -12,10 +12,14 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.kaakaa.pptmuseum.db.document.Document;
 import org.kaakaa.pptmuseum.db.document.Slide;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -91,9 +95,11 @@ public class RequestUtil {
         InputStream input = new ByteArrayInputStream(doc.getFile());
         try {
             PDDocument pdDoc = PDDocument.load(input);
-            PDPage page = (PDPage) pdDoc.getDocumentCatalog().getAllPages().get(0);
+            PDFRenderer render = new PDFRenderer(pdDoc);
+            BufferedImage bufferedImage = render.renderImage(0);
+
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(page.convertToImage(), "png", baos);
+            ImageIO.write(bufferedImage, "png", baos);
             slide.setThumbnail(baos.toByteArray());
         } catch (IOException e) {
             e.printStackTrace();

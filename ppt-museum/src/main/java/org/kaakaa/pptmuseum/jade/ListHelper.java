@@ -17,6 +17,7 @@ public class ListHelper {
                 l = new ArrayList<>();
             }
         }
+        result.add(l);
         return result;
     }
 }
