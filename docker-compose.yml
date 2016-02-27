@@ -16,10 +16,7 @@ nginx:
   command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
 web:
-  image: java
-  command: /bin/bash -c "/app/bin/ppt-museum"
-  volumes:
-    - ./ppt-museum/build/install/ppt-museum:/app
+  image: kaakaa/ppt-museum-web
   links:
     - db:db
     - jod:jod
