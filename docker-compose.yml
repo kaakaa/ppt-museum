@@ -23,5 +23,3 @@ web:
   links:
     - db:db
     - jod:jod
-    - redis:redis
-
