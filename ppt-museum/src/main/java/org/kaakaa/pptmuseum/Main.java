@@ -72,6 +72,13 @@ public class Main {
             return "redirect to /";
         });
 
+        // delete slide
+        delete("/ppt-museum/slide/delete/:id", (rq, rs) -> {
+            mongoDBClient.delete(rq.params("id"));
+            RedisClient.remove(rq.params("id"));
+            return 0;
+        });
+
         // slide view page
         get("/ppt-museum/slide/:id", (rq, rs) -> {
             HashMap<String, String> map = new HashMap<>();

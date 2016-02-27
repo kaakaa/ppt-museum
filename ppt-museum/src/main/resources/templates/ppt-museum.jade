@@ -76,6 +76,21 @@ html(lang="ja")
         });
       });
 
+      $("button[id^='remove-slide-']").on('click', function() {
+        var id = $(this).data('id');
+        $.ajax({
+          type: 'DELETE',
+          url: '/ppt-museum/slide/delete/' + id,
+          success: function(data) {
+            console.log(data);
+            location.reload();
+          },
+          error: function(err) {
+            alert("error" + JSON.stringify(err));
+          }
+        });
+      });
+
       $('#comment-form-*').submit(function(event) {
         event.preventDefault();
 

@@ -22,4 +22,10 @@ public class RedisClient {
             return bJedis.get(id.getBytes());
         }
     }
+
+    public static void remove(String id) {
+        try(BinaryJedis bJedis = pool.getResource()) {
+            bJedis.del(id.getBytes());
+        }
+    }
 }

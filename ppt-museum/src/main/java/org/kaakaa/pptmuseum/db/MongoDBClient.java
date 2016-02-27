@@ -56,7 +56,7 @@ public class MongoDBClient {
 
     public String getComments(String id) {
         Comments comments = datastore.find(Comments.class, "slideId =", id).get();
-        if(null == comments) {
+        if (null == comments) {
             return "No Comments.";
         } else {
             return comments.toHtml();
@@ -73,5 +73,18 @@ public class MongoDBClient {
         // save commments
         comments.addComment(c);
         return datastore.save(comments);
+    }
+
+    /**
+     * <p>DELETE uploaded slides</p>
+     *
+     * @param id id
+     */
+    public void delete(String id) {
+        datastore.delete(Slide.class, new ObjectId(id));
+        Query<Document> documentQuery = datastore.createQuery(Document.class).filter("id =", new ObjectId(id));
+        datastore.delete(documentQuery);
+        Query<Comments> commentsQuery = datastore.createQuery(Comments.class).filter("slideId =", id);
+        datastore.delete(commentsQuery);
     }
 }

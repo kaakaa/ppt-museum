@@ -6,6 +6,8 @@
     small.text-muted "- #{slide.getTime()}"
     button.btn.btn-info-outline(id="show-comment-#{slide.id}", type="button", data-toggle="modal", data-target="#comments", data-id="#{slide.id}")
       span.glyphicon.glyphicon-comment
+    button.btn.btn-info-outline(id="remove-slide-#{slide.id}", type="button", data-id="#{slide.id}")
+      span.glyphicon.glyphicon-remove
   .modal.fade#comments(tabindex="-1", role="dialog", aria-labellebdy="commentModalLabel")
     .modal-dialog(role="document")
       .modal-content
