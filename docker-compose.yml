@@ -1,5 +1,5 @@
 jod:
-  build: ./jod/
+  image: kaakaa/jodconverter
   command: tail -f > /dev/null
 
 db:
