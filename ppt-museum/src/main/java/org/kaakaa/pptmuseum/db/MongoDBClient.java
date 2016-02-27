@@ -30,7 +30,6 @@ public class MongoDBClient {
      */
     public Object upload(Slide slide, Document document) {
         Key<Slide> result = datastore.save(slide);
-        RedisClient.upload(result.getId().toString(), slide.getThumbnail());
         document.setId(result.getId().toString());
         return datastore.save(document);
     }
@@ -86,5 +85,10 @@ public class MongoDBClient {
         datastore.delete(documentQuery);
         Query<Comments> commentsQuery = datastore.createQuery(Comments.class).filter("slideId =", id);
         datastore.delete(commentsQuery);
+    }
+
+    public byte[] getThumbnail(String id) {
+        Slide slide = datastore.get(Slide.class, new ObjectId(id));
+        return slide.getThumbnail();
     }
 }

@@ -5,9 +5,6 @@ jod:
 db:
   image: mongo
 
-redis:
-  image: redis
-
 nginx:
   image: nginx
   ports:

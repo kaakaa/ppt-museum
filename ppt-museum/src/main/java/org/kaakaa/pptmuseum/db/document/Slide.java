@@ -22,7 +22,7 @@ public class Slide {
     private String title;
     @Property("description")
     private String description;
-
+    @Property("thumbnail")
     private byte[] thumbnail;
 
     public Slide() {
