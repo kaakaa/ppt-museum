@@ -3,7 +3,7 @@ var container = document.getElementById("pdf-container");
 var PDFController = require("pdf.js-controller");
 var controller = new PDFController({
     container: container,
-    pdfDistDir: __dirname + "/pdf/node_modules/pdfjs-dist/"
+    pdfjsDistDir: "/ppt-museum/"
 });
 
 controller.loadDocument(PDFURL)

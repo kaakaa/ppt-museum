@@ -51475,13 +51475,12 @@ if (typeof PDFJS === 'undefined') {
 })();
 
 },{}],8:[function(require,module,exports){
-(function (__dirname){
 var container = document.getElementById("pdf-container");
 
 var PDFController = require("pdf.js-controller");
 var controller = new PDFController({
     container: container,
-    pdfDistDir: __dirname + "/pdf/node_modules/pdfjs-dist/"
+    pdfjsDistDir: "/ppt-museum/"
 });
 
 controller.loadDocument(PDFURL)
@@ -51522,5 +51521,4 @@ function initializedEvent() {
 }
 
 
-}).call(this,"/src/main/web")
 },{"pdf.js-controller":3}]},{},[8]);
