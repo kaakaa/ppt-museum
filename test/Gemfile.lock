@@ -1,0 +1,97 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (4.2.5.2)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    addressable (2.4.0)
+    capybara (2.6.2)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    capybara-webkit (1.8.0)
+      capybara (>= 2.3.0, < 2.7.0)
+      json
+    cliver (0.3.2)
+    coderay (1.1.1)
+    diff-lcs (1.2.5)
+    docker-api (1.26.2)
+      excon (>= 0.38.0)
+      json
+    docker-compose-api (1.1.0)
+      docker-api (~> 1.22)
+    excon (0.47.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    gherkin (2.12.2)
+      multi_json (~> 1.3)
+    i18n (0.7.0)
+    json (1.8.3)
+    method_source (0.8.2)
+    mime-types (3.0)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0221)
+    mini_portile2 (2.0.0)
+    minitest (5.8.4)
+    multi_json (1.11.2)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
+    poltergeist (1.9.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    rack (1.6.4)
+    rack-test (0.6.3)
+      rack (>= 1.0)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.3)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
+    slop (3.6.0)
+    thread_safe (0.3.5)
+    turnip (2.1.0)
+      gherkin (~> 2.5)
+      rspec (>= 3.0, < 4.0)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+    websocket-driver (0.6.3)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  capybara
+  capybara-webkit
+  docker-compose-api
+  factory_girl
+  poltergeist
+  pry
+  rspec
+  turnip
+
+BUNDLED WITH
+   1.11.2
