@@ -4,12 +4,11 @@ source "https://rubygems.org"
 group :development, :test do
   gem 'pry'
   gem 'rspec'
-  gem 'factory_girl'
 
   gem 'capybara'
   gem "capybara-webkit"
   gem 'turnip'
   gem 'poltergeist'
 
-  gem 'docker-compose-api'
+  gem 'docker-api'
 end

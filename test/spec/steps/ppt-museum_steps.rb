@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'docker'
-require 'docker-compose'
 
 RESOURCES_DIR = File.expand_path("../../resources/", __FILE__)
 
@@ -32,7 +31,7 @@ step %(:textが表示されている) do |text|
 end
 
 step %(:fileがアップロードされている) do |file|
-  # expect(page).to have_content(text)
+  expect(page).to have_content(file)
   page.save_screenshot(
     File.expand_path("./snapshot/snap-#{file}.png"), full:true
   )
