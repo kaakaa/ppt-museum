@@ -22,7 +22,7 @@ services:
     command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
   
   web:
-    image: kaakaa/ppt-museum-web:8217604a
+    image: kaakaa/ppt-museum-web
     depends_on:
       - db
       - jod
